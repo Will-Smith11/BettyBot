@@ -5,7 +5,7 @@ import time
 import ResizeSlots
 from myDeck import check_for_match
 
-70 x pixel gap
+#70 X pixel gap
 slot1 = np.array([[120,728],[120,670],[190,670],[190,728]],np.int32)
 slot2 = np.array([[215,728],[215,670],[285,670],[285,728]],np.int32)
 slot3 = np.array([[305,728],[305,670],[375,670],[375,728]],np.int32)
