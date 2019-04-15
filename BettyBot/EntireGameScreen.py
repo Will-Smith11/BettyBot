@@ -11,6 +11,9 @@ width_percent = 60
 sct = mss()
 last_time = time.time()
 
+def convert_Gray(original_image):
+    processed_img = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+    return processed_img
 
 
 while True:
@@ -26,6 +29,7 @@ while True:
     #final_screen = process_img(resized)
 
     processed_img = cv2.cvtColor(resized, cv2.COLOR_RGB2BGR)
+    processed_img = convert_Gray(processed_img)
 
     cv2.imshow('screen', processed_img)
     print(f'running at {1/(time.time()-last_time)} FPS')

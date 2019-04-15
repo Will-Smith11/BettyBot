@@ -19,7 +19,6 @@ class Charater():
     @property
     def get_img(self):
         return np.array(cv2.imread(os.path.join(os.path.dirname(__file__), 'Entity_Imgs',f'{self.img}.png'),0))
-
     @property
     def has_spawnables(self):
         return self.spawnables
@@ -40,7 +39,7 @@ class Charater():
         return self.movementSpeed
 
 
-class Spell:
+class Spell():
     """
     base for all spells and throwables
     """
@@ -55,7 +54,6 @@ class Spell:
     @property
     def get_img(self):
         return np.array(cv2.imread(os.path.join(os.path.dirname(__file__), 'Entity_Imgs',f'{self.img}.png'),0))
-
     @property
     def get_duration(self):
         return self.duration
@@ -71,11 +69,9 @@ class Spell:
     @property
     def get_effects(self):
         return self.effects
-    @property
-    def img(self):
-        return self.img
 
-class Building:
+
+class Building():
     """
     base for all building info
     """
