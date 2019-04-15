@@ -2,12 +2,14 @@ import numpy as np
 from mss import mss
 import cv2
 import time
+import ResizeSlots
 
 
 slot1 = np.array([[120,728],[120,670],[190,670],[190,728]],np.int32)
 slot2 = np.array([[215,728],[215,670],[280,670],[280,728]],np.int32)
 slot3 = np.array([[310,728],[310,670],[375,670],[375,728]],np.int32)
 slot4 = np.array([[405,728],[405,670],[470,670],[470,728]],np.int32)
+eslot = np.array([[130,780],[130,755],[165,755],[165,780]],np.int32)
 bbox = {'top': 57, 'left': 0, 'width': 420, 'height': 750}
 
 #resizing pct of img
@@ -29,6 +31,7 @@ def areaOfInterest(img):
     cv2.fillPoly(mask, [slot2],(255,255,255))
     cv2.fillPoly(mask, [slot3],(255,255,255))
     cv2.fillPoly(mask, [slot4],(255,255,255))
+    cv2.fillPoly(mask, [eslot],(255,255,255))
     # now only show the area that is the mask
     masked = cv2.bitwise_and(img, mask)
     return masked
@@ -45,6 +48,8 @@ while True:
     dim = (width, height)
     resized = cv2.resize(screen, dim, interpolation = cv2.INTER_AREA)
     final_screen = elixerRegion(resized)
+
+
     #cv2.imwrite("image_processed.png", final_screen)
 
     cv2.imshow('screen', final_screen)
@@ -56,4 +61,4 @@ while True:
         break
     # screen shot slots
     if cv2.waitKey(1) & 0xFF == ord('s'):
-        cv2.imwrite(f"singleCharp{round(time.time(),4)}.png", final_screen)
+        cv2.imwrite("elixerRegion.png", final_screen)
