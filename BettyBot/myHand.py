@@ -5,10 +5,11 @@ import time
 import ResizeSlots
 from myDeck import check_for_match
 
-#70 X pixel gap
+
+
 slot1 = np.array([[120,728],[120,670],[190,670],[190,728]],np.int32)
 slot2 = np.array([[215,728],[215,670],[285,670],[285,728]],np.int32)
-slot3 = np.array([[305,728],[305,670],[375,670],[375,728]],np.int32)
+slot3 = np.array([[310,728],[310,670],[380,670],[380,728]],np.int32)
 slot4 = np.array([[405,728],[405,670],[475,670],[475,728]],np.int32)
 #eslot = np.array([[130,780],[130,755],[165,755],[165,780]],np.int32)
 bbox = {'top': 57, 'left': 0, 'width': 420, 'height': 750}
@@ -39,7 +40,7 @@ def areaOfInterest(img):
     return masked
 
 
-while True:
+def main():
     #get screen img
     sct_img = sct.grab(bbox)
     #convert img to array
@@ -56,15 +57,31 @@ while True:
     check3 = ResizeSlots.thirdSlot(final_screen)
     check4 = ResizeSlots.fourthSlot(final_screen)
 
-    print(check_for_match(check1))
+    slot1 = check_for_match(check1)
+    slot2 = check_for_match(check2)
+    slot3 = check_for_match(check3)
+    slot4 = check_for_match(check4)
 
-    cv2.imshow('screen', final_screen)
-    #print(f'running at {1/(time.time()-last_time)} FPS')
-    last_time = time.time()
-    # quit key
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        cv2.destroyAllWindows()
-        break
-    # screen shot slots
-    if cv2.waitKey(1) & 0xFF == ord('s'):
-        cv2.imwrite("elixerRegion.png", final_screen)
+
+    print(f"charater in slot1 is: {slot1}")
+    print(f"charater in slot2 is: {slot2}")
+    print(f"charater in slot3 is: {slot3}")
+    print(f"charater in slot4 is: {slot4}")
+    print("-----------------------------------------\n\n\n\n\n\n\n\n\n\n\n")
+
+    '''
+        cv2.imshow('screen', final_screen)
+        #print(f'running at {1/(time.time()-last_time)} FPS')
+        last_time = time.time()
+        # quit key
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cv2.destroyAllWindows()
+            break
+        # screen shot slots
+        if cv2.waitKey(1) & 0xFF == ord('s'):
+            cv2.imwrite("card2.png", final_screen)
+
+        #time.sleep(3)
+    '''
+if __name__== "__main__":
+    main()

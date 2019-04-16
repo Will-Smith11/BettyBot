@@ -15,21 +15,31 @@ fireball = Fireball().get_img
 
 
 def check_for_match(img):
+    try:
+        if np.allclose(img,giant,0,160):
+            return "giant"
 
-    if np.allclose(img,giant,0,100):
-        return "giant"
-    if np.allclose(img,knight,0,100):
-        return "knight"
-    if np.allclose(img,skellyArmy,0,100):
-        return "skellyArmy"
-    if np.allclose(img,minions,0,100):
-        return "minions"
-    if np.allclose(img,musketeer,0,100):
-        return "musketeer"
-    if np.allclose(img,babyDragon,0,100):
-        return "babyDragon"
-    if np.allclose(img,arrows,0,100):
-        return "arrows"
-    if np.allclose(img,fireball,0,100):
-        return "fireball"
-    return
+        elif np.allclose(img,minions,0,170):
+            return "minions"
+
+        elif np.allclose(img,knight,0,160):
+            return "knight"
+
+        elif np.allclose(img,babyDragon,0,185):
+            return "babyDragon"
+
+        elif np.allclose(img,skellyArmy,0,160):
+            return "skellyArmy"
+
+        elif np.allclose(img,musketeer,0,185):
+            return "musketeer"
+
+        elif np.allclose(img,arrows,0,160):
+            return "arrows"
+
+        elif np.allclose(img,fireball,0,160):
+            return "fireball"
+        return None
+
+    except Exception as e:
+        return (e.message, e.args)
