@@ -1,39 +1,36 @@
 from pynput.keyboard import Key, Controller
-import numpy as np
-import cv2
-
-
 keyboard = Controller()
-'''
-keyboard.press('a')
-keyboard.release('a')
-'''
-
 from pynput.mouse import Button, Controller
 mouse = Controller()
+import numpy as np
+import cv2
+import time
 
-print('The current pointer position is {0}'.format(
-    mouse.position))
+def selectCard(slotNum):
+    if slotNum == 1:
+        keyboard.press('z')
+        keyboard.release('z')
 
+    if slotNum == 2:
+        keyboard.press('x')
+        keyboard.release('x')
 
-mouse.position = (10, 20)
-print('Now we have moved it to {0}'.format(
-    mouse.position))
+    if slotNum == 3:
+        keyboard.press('c')
+        keyboard.release('c')
 
-mouse.move(5, -5)
+    if slotNum == 4:
+        keyboard.press('v')
+        keyboard.release('v')
 
+def placeMySide(xPos, yPos):
+    if not 430 > xPos > 65:
+        raise Exception(f"your x Position of: {xPos} is not on the map")
 
-mouse.press(Button.left)
-mouse.release(Button.left)
+    if not 590 > yPos > 365:
+        raise Exception(f"your y Position of: {yPos} is not on the map")
 
-# Double click; this is different from pressing and releasing
-# twice on Mac OSX
-mouse.click(Button.left, 2)
-
-# Scroll two steps down
-mouse.scroll(0, 2)
-
-
-def Place_cord_options():
-    vertice1 = np.array([[300,590],[300,365],[430,365],[430,590]],np.int32)
-    vertice2 = np.array([[65,590],[65,365],[200,365],[200,590]],np.int32)
+    mouse.position = (xPos, yPos)
+    mouse.press(Button.left)
+    mouse.release(Button.left)
+    return

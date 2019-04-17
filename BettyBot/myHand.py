@@ -40,7 +40,7 @@ def areaOfInterest(img):
     return masked
 
 
-def main():
+def getHandInfo():
     #get screen img
     sct_img = sct.grab(bbox)
     #convert img to array
@@ -62,14 +62,15 @@ def main():
     slot3 = check_for_match(check3)
     slot4 = check_for_match(check4)
 
-
+    return slot1, slot2, slot3, slot4
+'''
     print(f"charater in slot1 is: {slot1}")
     print(f"charater in slot2 is: {slot2}")
     print(f"charater in slot3 is: {slot3}")
     print(f"charater in slot4 is: {slot4}")
     print("-----------------------------------------\n\n\n\n\n\n\n\n\n\n\n")
 
-    '''
+
         cv2.imshow('screen', final_screen)
         #print(f'running at {1/(time.time()-last_time)} FPS')
         last_time = time.time()
@@ -83,5 +84,9 @@ def main():
 
         #time.sleep(3)
     '''
+
+
+
+
 if __name__== "__main__":
-    main()
+    getHandInfo()
