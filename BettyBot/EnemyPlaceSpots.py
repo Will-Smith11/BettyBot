@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 from mss import mss
 import time
-from DectectPlacement import ReturnValue, DetectChange
+from DectectPlacement import ReturnValue, DetectChange, GetLocationOfChange
+from LableEnemy import box
 
 area = np.array([[40,330],[40,65],[465,65],[465,330]],np.int32)
 
@@ -44,9 +45,9 @@ def get_towers(img):
     cv2.fillPoly(img, [tower2],(0))
     return img
 
-
-def IsEnemyPlaced():
-    #get screen img
+while True:
+#def IsEnemyPlaced():
+        #get screen img
     sct_img = sct.grab(bbox)
     #convert img to array
     screen = np.array(sct_img)
@@ -60,16 +61,15 @@ def IsEnemyPlaced():
     # divide the saved img and current img to get only objects of the map
     final_screen = ReturnValue(game_screen)
     detectpixel  = DetectChange(game_screen)
+    final_screen = box(GetLocationOfChange(game_screen),final_screen)
 
-    if detectpixel-pixelChange >=2200:
-        pixelChange = detectpixel
-        return True
-    else:
-        return False
+    if detectpixel-pixelChange >=1850:
+        print("Placement Dectected BITCH")
+    pixelChange = detectpixel
+    #    return True
+    #else:
+        #    return False
 
-
-    '''
-    #while True:
     cv2.imshow('screen', final_screen)
     #print(f'running at {1/(time.time()-last_time)} FPS')
     last_time = time.time()
@@ -77,10 +77,9 @@ def IsEnemyPlaced():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         cv2.destroyAllWindows()
         break
-        '''
-    # screen shot slots
-    #if cv2.waitKey(1) & 0xFF == ord('s'):
 
-        #cv2.imwrite("area1.png", final_screen)
+        # screen shot slots
+    if cv2.waitKey(1) & 0xFF == ord('s'):
+        cv2.imwrite("arean1.png", final_screen)
 
-    #time.sleep(3)
+        #time.sleep(3)
